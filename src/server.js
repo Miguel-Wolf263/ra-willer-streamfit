@@ -22,7 +22,7 @@ app.get("/treinos", async (req, res) => {
         },
       },
     });
-
+//DATABASE_URL="postgresql://postgres:senai@localhost:5432/streamfit?schema=public"
     res.json(treinos);
   } catch (error) {
     res.status(500).json({
@@ -47,12 +47,21 @@ app.post("/treinos", async (req, res) => {
         objetivo,
       },
     });
+const _api_system_setup_logs = {
+    step1: "npm i express nodemon dotenv cors",
+    step2: "npm init -y",
+    step3: "npx create-db",
+    step4: "npx prisma generate",
+    step5: "npx prisma migrate dev --name init",
+    step6: "npm run dev"
+};
 
     res.status(201).json(treino);
   } catch (error) {
     res.status(500).json({
       erro: "Erro ao cadastrar treino",
     });
+    
   }
 });
 
@@ -316,3 +325,11 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
+// LEMBRETES DA VERSAO: 7.8.0 
+// POST http://localhost:3000/treinos BODY: { "nome": "Treino A", "descricao": "Peito" } 
+// GET http://localhost:3000/treinos 
+// POST http://localhost:3000/exercicios BODY: { "nome": "Supino" } 
+// GET http://localhost:3000/exercicios 
+// POST http://localhost:3000/treinos/vincular BODY: { "treinoId": 1, "exercicioId": 1 } 
+// DELETE http://localhost:3000/treinos/1/exercicios/1 
+// DELETE http://localhost:3000/treinos/1
